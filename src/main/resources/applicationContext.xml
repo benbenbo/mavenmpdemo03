@@ -35,6 +35,16 @@
         <property name="plugins">
             <list>
                 <bean class="com.baomidou.mybatisplus.plugins.PaginationInterceptor"></bean>
+                <bean class="com.baomidou.mybatisplus.plugins.SqlExplainInterceptor">
+                    <property name="stopProceed" value="true"></property>
+                </bean>
+                <!--<bean class="com.baomidou.mybatisplus.plugins.PerformanceInterceptor">
+                    &lt;!&ndash;sql可运行的最大时间ms&ndash;&gt;
+                    <property name="maxTime" value="5"></property>
+                    &lt;!&ndash;sql是否格式化，默认为false&ndash;&gt;
+                    &lt;!&ndash;<property name="format" value="true"></property>&ndash;&gt;
+                </bean>-->
+                <bean class="com.baomidou.mybatisplus.plugins.OptimisticLockerInterceptor"></bean>
             </list>
         </property>
     </bean>

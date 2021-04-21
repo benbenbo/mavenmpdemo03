@@ -15,7 +15,7 @@ import java.util.List;
 public class TestPage {
     private ApplicationContext ctx=new ClassPathXmlApplicationContext("applicationContext.xml");
     private EmployeeMapper employeeMapper=ctx.getBean("employeeMapper",EmployeeMapper.class);
-    @Test
+
     public void testPage(){
         Page<Employee> employeePage = new Page<>(1, 1);
         List<Employee> employees = employeeMapper.selectPage(employeePage, null);
@@ -28,5 +28,35 @@ public class TestPage {
         System.out.println("后一页："+employeePage.hasNext());
 
         employeePage.setRecords(employees);
+    }
+
+
+    public void testAllDelete(){
+        Integer delete = employeeMapper.delete(null);
+        System.out.println(delete);
+    }
+
+
+    public void testPerformance(){
+        Employee employee=new Employee();
+        employee.setLastName("阿萨谢尔老师");
+        employee.setGender("1");
+        employee.setEmail("asxr@sina.com");
+        employee.setAge(23);
+        employeeMapper.insert(employee);
+    }
+
+    @Test
+    public void testOptimisticLocker(){
+        //更新操作
+        Employee employee=new Employee();
+        employee.setId(9);
+        employee.setLastName("Tom");
+        employee.setEmail("tom@sina.com");
+        employee.setGender("1");
+        employee.setAge(22);
+        employee.setVersion(2);
+        employeeMapper.updateById(employee);
+
     }
 }
